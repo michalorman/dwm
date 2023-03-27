@@ -32,6 +32,7 @@
 #include <sys/wait.h>
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
+#include <X11/XF86keysym.h> // imports audio control defs (XF86XK_*)
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
@@ -1698,8 +1699,9 @@ solitary(Client *c)
 void
 spawn(const Arg *arg)
 {
-	if (arg->v == dmenucmd)
-		dmenumon[0] = '0' + selmon->num;
+  // TODO: commented out, since the *-menu scripts do not support the -m switch.
+	// if (arg->v == dmenucmd)
+	// 	dmenumon[0] = '0' + selmon->num;
 	if (fork() == 0) {
 		if (dpy)
 			close(ConnectionNumber(dpy));
